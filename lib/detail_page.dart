@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/data/articles.dart';
+import 'package:news_app/web_detail_page.dart';
 
 class DetailPage extends StatelessWidget {
   static const routeName = '/article_detail';
@@ -44,7 +45,10 @@ class DetailPage extends StatelessWidget {
                   const Divider(color: Colors.grey),
                   ElevatedButton(
                     child: const Text('Read More'),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, WebDetailPage.routeName,
+                          arguments: article.url);
+                    },
                   ),
                 ],
               ),
