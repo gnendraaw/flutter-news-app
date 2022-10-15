@@ -32,9 +32,12 @@ class HomePage extends StatelessWidget {
 
 Widget _buildArticleItem(BuildContext context, Article article) {
   return ListTile(
-      leading: Image.network(
-        article.urlToImage,
-        width: 100,
+      leading: Hero(
+        tag: article.urlToImage,
+        child: Image.network(
+          article.urlToImage,
+          width: 100,
+        ),
       ),
       title: Text(article.title),
       subtitle: Text(article.author),
