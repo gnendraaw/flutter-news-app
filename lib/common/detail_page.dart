@@ -19,9 +19,9 @@ class DetailPage extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-              tag: article.urlToImage,
+              tag: article.urlToImage!,
               child: Image.network(
-                article.urlToImage,
+                article.urlToImage!,
               ),
             ),
             Padding(
@@ -29,7 +29,7 @@ class DetailPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(article.description),
+                  Text(article.description!),
                   const Divider(color: Colors.grey),
                   Text(
                     article.title,
@@ -40,7 +40,7 @@ class DetailPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    article.content,
+                    article.content!,
                   ),
                   const Divider(color: Colors.grey),
                   ElevatedButton(
