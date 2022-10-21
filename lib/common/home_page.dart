@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/data/articles.dart';
-import 'package:news_app/detail_page.dart';
+import 'package:news_app/data/model/articles.dart';
+import 'package:news_app/common/detail_page.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home_page';
