@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/common/home_page.dart';
-import 'package:news_app/common/detail_page.dart';
+import 'package:news_app/ui/home_page.dart';
+import 'package:news_app/ui/detail_page.dart';
 import 'package:news_app/data/model/articles.dart';
-import 'package:news_app/common/web_detail_page.dart';
+import 'package:news_app/ui/web_detail_page.dart';
 
 void main() {
   runApp(const MyApp());
