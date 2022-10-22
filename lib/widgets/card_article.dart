@@ -1,6 +1,7 @@
+import 'package:dicoding_news_app/common/styles.dart';
+import 'package:dicoding_news_app/data/model/article.dart';
+import 'package:dicoding_news_app/ui/article_detail_page.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/data/model/articles.dart';
-import 'package:news_app/ui/detail_page.dart';
 
 class CardArticle extends StatelessWidget {
   final Article article;
@@ -9,22 +10,28 @@ class CardArticle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding:
-          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      leading: Hero(
-        tag: article.urlToImage!,
-        child: Image.network(article.urlToImage!),
-      ),
-      title: Text(article.title),
-      subtitle: Text(article.author ?? ""),
-      onTap: () {
-        Navigator.pushNamed(
+    return Material(
+      color: primaryColor,
+      child: ListTile(
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        leading: Hero(
+          tag: article.urlToImage!,
+          child: Image.network(
+            article.urlToImage!,
+            width: 100,
+          ),
+        ),
+        title: Text(
+          article.title,
+        ),
+        subtitle: Text(article.author!),
+        onTap: () => Navigator.pushNamed(
           context,
-          DetailPage.routeName,
+          ArticleDetailPage.routeName,
           arguments: article,
-        );
-      },
+        ),
+      ),
     );
   }
 }

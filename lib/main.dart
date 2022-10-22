@@ -1,32 +1,54 @@
+import 'package:dicoding_news_app/common/styles.dart';
+import 'package:dicoding_news_app/data/model/article.dart';
+import 'package:dicoding_news_app/ui/article_detail_page.dart';
+import 'package:dicoding_news_app/ui/article_web_view.dart';
+import 'package:dicoding_news_app/ui/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/ui/home_page.dart';
-import 'package:news_app/ui/detail_page.dart';
-import 'package:news_app/data/model/articles.dart';
-import 'package:news_app/ui/web_detail_page.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-        ),
-        initialRoute: HomePage.routeName,
-        routes: {
-          HomePage.routeName: (context) => const HomePage(),
-          DetailPage.routeName: (context) => DetailPage(
-                article: ModalRoute.of(context)?.settings.arguments as Article,
+      title: 'News App',
+      theme: ThemeData(
+        colorScheme: Theme.of(context).colorScheme.copyWith(
+              primary: primaryColor,
+              onPrimary: Colors.black,
+              secondary: secondaryColor,
+            ),
+        scaffoldBackgroundColor: Colors.white,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: myTextTheme,
+        appBarTheme: const AppBarTheme(elevation: 0),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: secondaryColor,
+            onPrimary: Colors.white,
+            textStyle: const TextStyle(),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(0),
               ),
-          WebDetailPage.routeName: (context) => WebDetailPage(
-              url: ModalRoute.of(context)?.settings.arguments as String),
-        });
+            ),
+          ),
+        ),
+      ),
+      initialRoute: HomePage.routeName,
+      routes: {
+        HomePage.routeName: (context) => const HomePage(),
+        ArticleDetailPage.routeName: (context) => ArticleDetailPage(
+              article: ModalRoute.of(context)?.settings.arguments as Article,
+            ),
+        ArticleWebView.routeName: (context) => ArticleWebView(
+              url: ModalRoute.of(context)?.settings.arguments as String,
+            ),
+      },
+    );
   }
 }
