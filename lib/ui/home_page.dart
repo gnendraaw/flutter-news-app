@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dicoding_news_app/common/styles.dart';
 import 'package:dicoding_news_app/ui/article_list_page.dart';
+import 'package:dicoding_news_app/ui/bookmark_page.dart';
 import 'package:dicoding_news_app/ui/settings_page.dart';
 import 'package:dicoding_news_app/widgets/platform_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,14 +22,19 @@ class _HomePageState extends State<HomePage> {
   static const String _headlineText = 'Headline';
 
   final List<Widget> _listWidget = [
-    ArticleListPage(),
-    SettingsPage(),
+    const ArticleListPage(),
+    const BookmarksPage(),
+    const SettingsPage(),
   ];
 
   final List<BottomNavigationBarItem> _bottomNavBarItems = [
     BottomNavigationBarItem(
       icon: Icon(Platform.isIOS ? CupertinoIcons.news : Icons.public),
       label: _headlineText,
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Platform.isIOS ? CupertinoIcons.bookmark : Icons.bookmark),
+      label: 'Bookmarks',
     ),
     BottomNavigationBarItem(
       icon: Icon(Platform.isIOS ? CupertinoIcons.settings : Icons.settings),

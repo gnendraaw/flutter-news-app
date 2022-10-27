@@ -29,7 +29,7 @@ class Article {
   String? description;
   String url;
   String? urlToImage;
-  DateTime? publishedAt;
+  String? publishedAt;
   String? content;
 
   Article({
@@ -48,7 +48,17 @@ class Article {
         description: json["description"],
         url: json["url"],
         urlToImage: json["urlToImage"],
-        publishedAt: DateTime.parse(json["publishedAt"]),
+        publishedAt: json["publishedAt"],
         content: json["content"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "author": author,
+        "title": title,
+        "description": description,
+        "url": url,
+        "urlToImage": urlToImage,
+        "publishedAt": publishedAt,
+        "content": content,
+      };
 }

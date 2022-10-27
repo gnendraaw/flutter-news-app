@@ -1,6 +1,8 @@
 import 'package:dicoding_news_app/common/styles.dart';
 import 'package:dicoding_news_app/data/model/article.dart';
+import 'package:dicoding_news_app/provider/database_provider.dart';
 import 'package:dicoding_news_app/ui/article_detail_page.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class CardArticle extends StatelessWidget {
@@ -10,28 +12,51 @@ class CardArticle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: primaryColor,
-      child: ListTile(
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        leading: Hero(
-          tag: article.urlToImage!,
-          child: Image.network(
-            article.urlToImage!,
-            width: 100,
-          ),
-        ),
-        title: Text(
-          article.title,
-        ),
-        subtitle: Text(article.author!),
-        onTap: () => Navigator.pushNamed(
-          context,
-          ArticleDetailPage.routeName,
-          arguments: article,
-        ),
-      ),
+    return Consumer<DatabaseProvider>(
+      builder: (context, provider, child) {
+        return FutureBuilder<bool>(
+          future: provider.isBookmarked(article.url),
+          builder: (context, snapshot) {
+            var isBookmarked = snapshot.data ?? false;
+            return Material(
+              color: primaryColor,
+              child: ListTile(
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                leading: Hero(
+                  tag: article.urlToImage!,
+                  child: Image.network(
+                    article.urlToImage!,
+                    width: 100,
+                  ),
+                ),
+                trailing: isBookmarked
+                    ? IconButton(
+                        icon: const Icon(Icons.bookmark),
+                        onPressed: () {
+                          provider.removeBookmark(article.url);
+                        },
+                      )
+                    : IconButton(
+                        icon: const Icon(Icons.bookmark_border),
+                        onPressed: () {
+                          provider.addBookmark(article);
+                        },
+                      ),
+                title: Text(
+                  article.title,
+                ),
+                subtitle: Text(article.author!),
+                onTap: () => Navigator.pushNamed(
+                  context,
+                  ArticleDetailPage.routeName,
+                  arguments: article,
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
